@@ -57,3 +57,40 @@ as.numeric(as.factor(pull(df, vec_logical))) * pull(df, random)
 
 ```
 
+Problem 2 
+
+```{r}
+# Creating a data frame 
+df2 = tibble(
+  x = rnorm(500),
+  y = rnorm(500),
+  vec_logical = x + y > 1,
+  vec_numeric = as.numeric(vec_logical),
+  vec_factor = as.factor(vec_logical)
+)
+```
+
+Here is a short description of the dataframe created: 
+This dataframe has `r nrow(df2)` rows and `r ncol(df2)` columns. 
+The mean, median and standard deviation of 'x' variable is `r mean(pull(df2, x))`, `r median(pull(df2, x))`, and `r sd(pull(df2, x))` respectively. The proportion of cases with x + y > 1 is `r mean(pull(df2, x))` 
+
+```{r}
+# Creating a scatter plot of  y vs x 
+plot1 = ggplot(df2, aes(x=x, y=y, color=vec_logical)) + 
+  geom_point()
+
+print(plot1)
+
+plot2 = ggplot(df2, aes(x=x, y=y, color=vec_numeric)) + 
+  geom_point()
+
+print(plot2)
+
+plot3 = ggplot(df2, aes(x=x, y=y, color=vec_factor)) + 
+  geom_point()
+
+print(plot3)
+```
+
+
+
