@@ -101,9 +101,11 @@ df2 = tibble(
 )
 ```
 
-Here is a short description of the dataframe created above: 
-This dataframe has `r nrow(df2)` rows and `r ncol(df2)` columns. 
-The mean, median and standard deviation of 'x' variable is `r mean(pull(df2, x))`, `r median(pull(df2, x))`, and `r sd(pull(df2, x))` respectively. The proportion of cases with x + y > 1 is `r mean(pull(df2, x))` 
+###### Here is a short description of the dataframe created above: 
+
+* This dataframe has **`r nrow(df2)` rows** and **`r ncol(df2)` columns**. 
+* The mean, median and standard deviation of 'x' variable is **`r mean(pull(df2, x))`**, **`r median(pull(df2, x))`**, and **`r sd(pull(df2, x))`** respectively. 
+* The proportion of cases with x + y > 1 is **`r mean(pull(df2, x))`** 
 
 ```{r}
 # Creating a scatter plot of  y vs x; color points using the logical variable
