@@ -112,6 +112,7 @@ plot1 = ggplot(df2, aes(x=x, y=y, color=vec_logical)) +
 
 print(plot1)
 ```
+
 The color scale is categorical and the color assigned to FALSE values is orange and TRUE values is green
 
 ```{r}
@@ -121,6 +122,7 @@ plot2 = ggplot(df2, aes(x=x, y=y, color=vec_numeric)) +
 
 print(plot2) 
 ```
+
 The color scale is continuous and the colors are assigned from low (0.00) = BLACK to high (1.00) = BLUE 
 
 ```{r}
@@ -130,6 +132,7 @@ plot3 = ggplot(df2, aes(x=x, y=y, color=vec_factor)) +
 
 print(plot3) 
 ```
+
 The color scale is categorical and the color assigned to FALSE values is orange and TRUE values is green
 
 ```{r}
