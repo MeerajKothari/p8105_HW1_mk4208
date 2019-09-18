@@ -24,7 +24,7 @@ df = tibble(
   random = rnorm(8),
   vec_logical = random > 0,
   vec_char = c("a", "b", "c", "e", "f", "g", "h", "i"),
-  vec_factor = factor(c(1, 2, 3, 1, 2, 3, 1, 2))
+  vec_factor = factor(c("M", "F", "X", "M", "F", "X", "M", "F"))
 )
 
 # Taking the mean of each variable in the dataframe 
