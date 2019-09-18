@@ -44,29 +44,38 @@ mean(pull(df, vec_factor)) # DOES NOT WORK
 
 ## Coercing the logical, character and factor variables from the dataframe to numeric and then taking the means 
 
+Writing a code chunk that applies as.numeric function to the logical, character, and factor variables 
 ```{r}
-# Writing a code chunk that applies as.numeric function to the logical, character, and factor variables 
 
-mean(as.numeric(pull(df, vec_logical))) # as.numeric converts FALSE to 0 and TRUE to 1 and the mean function takes the mean of these newly converted variable 
-
-mean(as.numeric(pull(df, vec_char))) # as.numeric is unable to convert the character strings to numeric values and hence the mean function returns NA
-
-mean(as.numeric(pull(df, vec_factor))) # as.numeric converts the first level of the factor to 1, second level of the factor to 2 and third level of the factor to 3 and the mean function takes the mean of these nuewly converted values
-
+mean(as.numeric(pull(df, vec_logical))) 
 ```
-
-The following code chunk co
+as.numeric converts FALSE to 0 and TRUE to 1 and the mean function takes the mean of these newly converted values 
 
 ```{r}
-# Converting the logical vector to numeric and multiplying the random sample by the result 
+mean(as.numeric(pull(df, vec_char)))
+```
+as.numeric is unable to convert the character strings to numeric values and hence the mean function returns NA
+
+```{r}
+mean(as.numeric(pull(df, vec_factor))) 
+```
+as.numeric converts the first level of the factor to 1, second level of the factor to 2 and third level of the factor to 3 and the mean function takes the mean of these newly converted values
+
+## The next code chunk does the following: 
+###### 1. Converts the logical vector to numeric, and multiplies the random sample by the result
+###### 2. Converts the logical vector to a factor, and multiplies the random sample by the result
+###### 3. Converts the logical vector to a factor and then converts the result to numeric, and multiplies the random sample by the result
+
+```{r}
+# 1. Converting the logical vector to numeric and multiplying the random sample by the result 
 
 as.numeric(pull(df, vec_logical)) * pull(df, random) 
 
-# Converting the logical vector to a factor and multiplying the random sample by the result 
+# 2. Converting the logical vector to a factor and multiplying the random sample by the result 
 
 as.factor(pull(df, vec_logical)) * pull(df, random)
 
-# Converting the logical vector to a factor and then converting the result to numberic and multiplying the random sample by the result 
+# 3. Converting the logical vector to a factor and then converting the result to numberic and multiplying the random sample by the result 
 
 as.numeric(as.factor(pull(df, vec_logical))) * pull(df, random)
 
@@ -101,20 +110,29 @@ The mean, median and standard deviation of 'x' variable is `r mean(pull(df2, x))
 plot1 = ggplot(df2, aes(x=x, y=y, color=vec_logical)) + 
   geom_point() 
 
-print(plot1) # The color scale is categorical and the color assigned to FALSE values is orange and TRUE values is green
+print(plot1)
+```
+The color scale is categorical and the color assigned to FALSE values is orange and TRUE values is green
 
+```{r}
 # Creating a scatter plot of  y vs x; color points using the numeric variable
 plot2 = ggplot(df2, aes(x=x, y=y, color=vec_numeric)) + 
   geom_point() 
 
-print(plot2) # The color scale is continuous and the colors are assigned from low (0.00) = BLACK to high (1.00) = BLUE 
+print(plot2) 
+```
+The color scale is continuous and the colors are assigned from low (0.00) = BLACK to high (1.00) = BLUE 
 
+```{r}
 # Creating a scatter plot of  y vs x; color points using the factor variable
 plot3 = ggplot(df2, aes(x=x, y=y, color=vec_factor)) + 
   geom_point()
 
-print(plot3) # The color scale is categorical and the color assigned to FALSE values is orange and TRUE values is green
+print(plot3) 
+```
+The color scale is categorical and the color assigned to FALSE values is orange and TRUE values is green
 
+```{r}
 # Exporting the first scatterplot 
 ggsave("plot1.png", plot=plot1)
 ```
