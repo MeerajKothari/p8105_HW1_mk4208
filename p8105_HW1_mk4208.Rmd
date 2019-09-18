@@ -1,5 +1,7 @@
 ---
 title: "p8105_HW1_mk4208"
+author: "Meeraj Kothari"
+date: 2019-09-18
 output: github_document
 ---
 
@@ -7,14 +9,16 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Loading packages
+# Loading packages
 
 ```{r}
 library(tidyverse)
 ```
 
 
-Problem 1 
+# Problem 1 
+
+## Creating a dataframe and taking the means of the variables in the data frame
 
 ```{r}
 # Creating a data frame
@@ -28,24 +32,35 @@ df = tibble(
 )
 
 # Taking the mean of each variable in the dataframe 
+
 mean(pull(df, random)) # WORKS 
-mean(pull(df, vec_logical)) # WORKS
-mean(pull(df, vec_char)) # Does not work
-mean(pull(df, vec_factor)) # Does not work
+
+mean(pull(df, vec_logical)) # WORKS 
+
+mean(pull(df, vec_char)) # DOES NOT WORK 
+
+mean(pull(df, vec_factor)) # DOES NOT WORK
 ```
+
+## Coercing the logical, character and factor variables from the dataframe to numeric and then taking the means 
 
 ```{r}
 # Writing a code chunk that applies as.numeric function to the logical, character, and factor variables 
 
-mean(as.numeric(pull(df, vec_logical)))
-mean(as.numeric(pull(df, vec_char)))
-mean(as.numeric(pull(df, vec_factor)))
+mean(as.numeric(pull(df, vec_logical))) # as.numeric converts FALSE to 0 and TRUE to 1 and the mean function takes the mean of these newly converted variable 
+
+mean(as.numeric(pull(df, vec_char))) # as.numeric is unable to convert the character strings to numeric values and hence the mean function returns NA
+
+mean(as.numeric(pull(df, vec_factor))) # as.numeric converts the first level of the factor to 1, second level of the factor to 2 and third level of the factor to 3 and the mean function takes the mean of these nuewly converted values
+
 ```
+
+The following code chunk co
 
 ```{r}
 # Converting the logical vector to numeric and multiplying the random sample by the result 
 
-as.numeric(pull(df, vec_logical)) * pull(df, random)
+as.numeric(pull(df, vec_logical)) * pull(df, random) 
 
 # Converting the logical vector to a factor and multiplying the random sample by the result 
 
@@ -57,7 +72,14 @@ as.numeric(as.factor(pull(df, vec_logical))) * pull(df, random)
 
 ```
 
-Problem 2 
+# Problem 2 
+
+Creating a data frame comprised of:
+  x: a random sample of size 500 from a standard Normal distribution.
+  y: a random sample of size 500 from a standard Normal distribution.
+  A logical vector indicating whether x + y > 1.
+  A numeric vector created by coercing the above logical vector.
+  A factor vector created by coercing the above logical vector.
 
 ```{r}
 # Creating a data frame 
@@ -70,26 +92,31 @@ df2 = tibble(
 )
 ```
 
-Here is a short description of the dataframe created: 
+Here is a short description of the dataframe created above: 
 This dataframe has `r nrow(df2)` rows and `r ncol(df2)` columns. 
 The mean, median and standard deviation of 'x' variable is `r mean(pull(df2, x))`, `r median(pull(df2, x))`, and `r sd(pull(df2, x))` respectively. The proportion of cases with x + y > 1 is `r mean(pull(df2, x))` 
 
 ```{r}
-# Creating a scatter plot of  y vs x 
+# Creating a scatter plot of  y vs x; color points using the logical variable
 plot1 = ggplot(df2, aes(x=x, y=y, color=vec_logical)) + 
-  geom_point()
+  geom_point() 
 
-print(plot1)
+print(plot1) # The color scale is categorical and the color assigned to FALSE values is orange and TRUE values is green
 
+# Creating a scatter plot of  y vs x; color points using the numeric variable
 plot2 = ggplot(df2, aes(x=x, y=y, color=vec_numeric)) + 
-  geom_point()
+  geom_point() 
 
-print(plot2)
+print(plot2) # The color scale is continuous and the colors are assigned from low (0.00) = BLACK to high (1.00) = BLUE 
 
+# Creating a scatter plot of  y vs x; color points using the factor variable
 plot3 = ggplot(df2, aes(x=x, y=y, color=vec_factor)) + 
   geom_point()
 
-print(plot3)
+print(plot3) # The color scale is categorical and the color assigned to FALSE values is orange and TRUE values is green
+
+# Exporting the first scatterplot 
+ggsave("plot1.png", plot=plot1)
 ```
 
 
