@@ -44,7 +44,7 @@ mean(pull(df, vec_factor)) # DOES NOT WORK
 
 ## Coercing the logical, character and factor variables from the dataframe to numeric and then taking the means 
 
-Writing a code chunk that applies as.numeric function to the logical, character, and factor variables 
+###### Writing a code chunk that applies as.numeric function to the logical, character, and factor variables 
 ```{r}
 
 mean(as.numeric(pull(df, vec_logical))) 
